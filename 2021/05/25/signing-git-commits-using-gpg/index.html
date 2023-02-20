@@ -262,7 +262,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --list-secret-keys --keyid-format LONG</span><br></pre></td></tr></table></figure>
 
 <p>In the output find out the Key ID with the following format (assuming we picked <code>RSA</code> and <code>4096</code> bits key size when generating GPG key): </p>
-<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">...</span></span><br><span class="line">sec   rsa4096/&#123;KEY-ID&#125; </span><br><span class="line"><span class="meta">...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">...</span></span><br><span class="line">sec   rsa4096/&#123;KEY-ID&#125; </span><br><span class="line"><span class="meta prompt_">...</span></span><br></pre></td></tr></table></figure>
 
 <p>Tell git which key to use:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.signingkey &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
