@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>haosong/notes.git</title>
+  <title>NSHaoSong/notes.git</title>
   
   <subtitle>repository of my random notes</subtitle>
   <link href="https://haosong.name/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://haosong.name/</id>
   
   <author>
-    <name>Hao Song</name>
+    <name>NSHaoSong</name>
     
   </author>
   
@@ -112,7 +112,7 @@
     <link href="https://haosong.name/2016/02/16/first-commit/"/>
     <id>https://haosong.name/2016/02/16/first-commit/</id>
     <published>2016-02-17T07:03:09.000Z</published>
-    <updated>2021-10-29T23:52:11.218Z</updated>
+    <updated>2023-02-26T16:08:38.231Z</updated>
     
     <content type="html"><![CDATA[<p>Finally got my blog up with <a href="https://hexo.io/">Hexo</a> and <a href="https://pages.github.com/">GitHub pages</a>. :D </p>]]></content>
     
