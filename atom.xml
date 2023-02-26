@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>NSHaoSong/notes.git</title>
+  <title>NSHaoSong</title>
   
   <subtitle>repository of my random notes</subtitle>
   <link href="https://haosong.name/atom.xml" rel="self"/>
