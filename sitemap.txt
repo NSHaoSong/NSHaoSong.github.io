@@ -9,11 +9,11 @@ https://haosong.name/tags/swift/
 https://haosong.name/tags/c/
 https://haosong.name/tags/variadic-function/
 https://haosong.name/tags/va-list/
-https://haosong.name/tags/git/
-https://haosong.name/tags/gpg/
-https://haosong.name/tags/mac/
 https://haosong.name/tags/ios/
 https://haosong.name/tags/debug/
 https://haosong.name/tags/os-log/
+https://haosong.name/tags/git/
+https://haosong.name/tags/gpg/
+https://haosong.name/tags/mac/
 https://haosong.name/categories/main/
 https://haosong.name/categories/develop/

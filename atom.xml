@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>NSHaoSong</title>
   
-  <subtitle>repository of my random notes</subtitle>
+  
   <link href="https://haosong.name/atom.xml" rel="self"/>
   
   <link href="https://haosong.name/"/>
