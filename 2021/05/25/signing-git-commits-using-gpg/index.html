@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="InstallationTo sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). 1$ brew install gpg pinentry-mac  Setup GPGRun the following command to set pine">
+    <meta name="description" content="InstallationTo sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). $ brew install gpg pinentry-mac  Setup GPGRun the following command to set pinen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Signing Git Commits Using GPG">
 <meta property="og:url" content="https://haosong.name/2021/05/25/signing-git-commits-using-gpg/index.html">
 <meta property="og:site_name" content="NSHaoSong">
-<meta property="og:description" content="InstallationTo sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). 1$ brew install gpg pinentry-mac  Setup GPGRun the following command to set pine">
+<meta property="og:description" content="InstallationTo sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). $ brew install gpg pinentry-mac  Setup GPGRun the following command to set pinen">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-25T21:59:02.000Z">
 <meta property="article:modified_time" content="2023-03-12T19:08:57.940Z">
@@ -239,41 +239,41 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>To sign git commits on macOS, we need to install <code>gpg</code> and <code>pinentry-mac</code> (for storing passphrase in keychain).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install gpg pinentry-mac</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install gpg pinentry-mac</span><br></pre></td></tr></table></figure>
 
 <h2 id="Setup-GPG"><a href="#Setup-GPG" class="headerlink" title="Setup GPG"></a>Setup GPG</h2><p>Run the following command to set <code>pinentry-mac</code> as <code>pinentry-program</code> in <code>~/.gnupg/gpg-agent.conf</code>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;pinentry-program <span class="subst">$(brew --prefix)</span>/bin/pinentry-mac&quot;</span> &gt;&gt; ~/.gnupg/gpg-agent.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;pinentry-program <span class="subst">$(brew --prefix)</span>/bin/pinentry-mac&quot;</span> &gt;&gt; ~/.gnupg/gpg-agent.conf</span><br></pre></td></tr></table></figure>
 
 <p>Add the following line to <code>~/.gnupg/gpg.conf</code>:</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span>-agent</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use-agent</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<h2 id="Generate-a-GPG-key"><a href="#Generate-a-GPG-key" class="headerlink" title="Generate a GPG key"></a>Generate a GPG key</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --full-generate-key</span><br></pre></td></tr></table></figure>
+<h2 id="Generate-a-GPG-key"><a href="#Generate-a-GPG-key" class="headerlink" title="Generate a GPG key"></a>Generate a GPG key</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --full-generate-key</span><br></pre></td></tr></table></figure>
 
 <p>Follow the instruction here: <a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/generating-a-new-gpg-key">Generating a new GPG key</a></p>
-<h2 id="Confirm-GPG-is-working"><a href="#Confirm-GPG-is-working" class="headerlink" title="Confirm GPG is working"></a>Confirm GPG is working</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span> | gpg --clearsign</span><br></pre></td></tr></table></figure>
+<h2 id="Confirm-GPG-is-working"><a href="#Confirm-GPG-is-working" class="headerlink" title="Confirm GPG is working"></a>Confirm GPG is working</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span> | gpg --clearsign</span><br></pre></td></tr></table></figure>
 
 <p>We can restart gpg agent if needed:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gpgconf --<span class="built_in">kill</span> gpg-agent</span><br><span class="line">$ gpgconf --launch gpg-agent</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpgconf --<span class="built_in">kill</span> gpg-agent</span><br><span class="line">$ gpgconf --launch gpg-agent</span><br></pre></td></tr></table></figure>
 
 <h2 id="Set-GPG-signing-key-in-Git"><a href="#Set-GPG-signing-key-in-Git" class="headerlink" title="Set GPG signing key in Git"></a>Set GPG signing key in Git</h2><p>List all the keys:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --list-secret-keys --keyid-format LONG</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --list-secret-keys --keyid-format LONG</span><br></pre></td></tr></table></figure>
 
 <p>In the output find out the Key ID with the following format (assuming we picked <code>RSA</code> and <code>4096</code> bits key size when generating GPG key): </p>
-<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">...</span></span><br><span class="line">sec   rsa4096/&#123;KEY-ID&#125; </span><br><span class="line"><span class="meta prompt_">...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">sec   rsa4096/&#123;KEY-ID&#125; </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>Tell git which key to use:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.signingkey &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.signingkey &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
 
 <p>To sign all commits automatically:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>To sign all tags automatically:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global tag.forceSignAnnotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global tag.forceSignAnnotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Add-GPG-key-to-GitHub"><a href="#Add-GPG-key-to-GitHub" class="headerlink" title="Add GPG key to GitHub"></a>Add GPG key to GitHub</h2><p>Print the GPG key: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --armor --<span class="built_in">export</span> &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --armor --<span class="built_in">export</span> &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Copy the GPG key, beginning with <code>-----BEGIN PGP PUBLIC KEY BLOCK-----</code> and ending with <code>-----END PGP PUBLIC KEY BLOCK-----</code>, and <a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account">add it to GitHub SSH and GPG keys Settings</a>.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
