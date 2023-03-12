@@ -20,28 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="TL;DRHow to change directory, execute a command and get back to where you were earlier? (cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
+    <meta name="description" content="TL;DRHow to execute a command in a different directory and stay at where you were earlier? (cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Change directory and execute command">
-<meta property="og:url" content="https://haosong.name/2023/03/12/change-directory-and-execute-command/index.html">
+<meta property="og:title" content="Execute command in a different directory">
+<meta property="og:url" content="https://haosong.name/2023/03/12/execute-command-in-a-different-directory/index.html">
 <meta property="og:site_name" content="NSHaoSong">
-<meta property="og:description" content="TL;DRHow to change directory, execute a command and get back to where you were earlier? (cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
+<meta property="og:description" content="TL;DRHow to execute a command in a different directory and stay at where you were earlier? (cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-12T19:07:58.000Z">
-<meta property="article:modified_time" content="2023-03-12T22:24:56.771Z">
+<meta property="article:modified_time" content="2023-03-12T23:50:35.200Z">
 <meta property="article:author" content="NSHaoSong">
 <meta property="article:tag" content="shell scripting">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://haosong.name/2023/03/12/change-directory-and-execute-command/">
+<link rel="canonical" href="https://haosong.name/2023/03/12/execute-command-in-a-different-directory/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/03/12/change-directory-and-execute-command/","path":"2023/03/12/change-directory-and-execute-command/","title":"Change directory and execute command"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/03/12/execute-command-in-a-different-directory/","path":"2023/03/12/execute-command-in-a-different-directory/","title":"Execute command in a different directory"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Change directory and execute command | NSHaoSong</title>
+<title>Execute command in a different directory | NSHaoSong</title>
   
 
 
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://haosong.name/2023/03/12/change-directory-and-execute-command/">
+    <link itemprop="mainEntityOfPage" href="https://haosong.name/2023/03/12/execute-command-in-a-different-directory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,12 +191,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Change directory and execute command | NSHaoSong">
+      <meta itemprop="name" content="Execute command in a different directory | NSHaoSong">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Change directory and execute command
+          Execute command in a different directory
         </h1>
 
         <div class="post-meta-container">
@@ -208,7 +208,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-03-12 12:07:58 / Modified: 15:24:56" itemprop="dateCreated datePublished" datetime="2023-03-12T12:07:58-07:00">2023-03-12</time>
+      <time title="Created: 2023-03-12 12:07:58 / Modified: 16:50:35" itemprop="dateCreated datePublished" datetime="2023-03-12T12:07:58-07:00">2023-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -230,7 +230,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>How to change directory, execute a command and get back to where you were earlier?</p>
+        <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>How to execute a command in a different directory and stay at where you were earlier?</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">cd</span> path/to/some/dir &amp;&amp; ./some-command)</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
@@ -273,7 +273,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://haosong.name/2023/03/12/change-directory-and-execute-command/" title="Change directory and execute command">https://haosong.name/2023/03/12/change-directory-and-execute-command/</a>
+      <a href="https://haosong.name/2023/03/12/execute-command-in-a-different-directory/" title="Execute command in a different directory">https://haosong.name/2023/03/12/execute-command-in-a-different-directory/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
