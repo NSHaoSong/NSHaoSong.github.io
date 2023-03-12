@@ -20,30 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Unified logging system (aka os_log)The unified logging system (aka os_log) is the recommended way of logging by Apple. It’s pretty easy to create a logger and log messages at different levels: 1234567">
+    <meta name="description" content="TL;DRHow to change directory, execute a command and get back to where you were earlier? 1(cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viewing debug level logs from iOS simulator">
-<meta property="og:url" content="https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/index.html">
+<meta property="og:title" content="Change directory and execute command">
+<meta property="og:url" content="https://haosong.name/2023/03/12/change-directory-and-execute-command/index.html">
 <meta property="og:site_name" content="NSHaoSong">
-<meta property="og:description" content="Unified logging system (aka os_log)The unified logging system (aka os_log) is the recommended way of logging by Apple. It’s pretty easy to create a logger and log messages at different levels: 1234567">
+<meta property="og:description" content="TL;DRHow to change directory, execute a command and get back to where you were earlier? 1(cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-05-30T16:38:09.000Z">
-<meta property="article:modified_time" content="2023-03-12T19:08:57.940Z">
+<meta property="article:published_time" content="2023-03-12T19:07:58.000Z">
+<meta property="article:modified_time" content="2023-03-12T21:15:53.798Z">
 <meta property="article:author" content="NSHaoSong">
-<meta property="article:tag" content="ios">
-<meta property="article:tag" content="debug">
-<meta property="article:tag" content="os_log">
+<meta property="article:tag" content="shell scripting">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/">
+<link rel="canonical" href="https://haosong.name/2023/03/12/change-directory-and-execute-command/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/","path":"2021/05/30/viewing-debug-level-logs-from-ios-simulator/","title":"Viewing debug level logs from iOS simulator"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/03/12/change-directory-and-execute-command/","path":"2023/03/12/change-directory-and-execute-command/","title":"Change directory and execute command"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Viewing debug level logs from iOS simulator | NSHaoSong</title>
+<title>Change directory and execute command | NSHaoSong</title>
   
 
 
@@ -116,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unified-logging-system-aka-os-log"><span class="nav-number">1.</span> <span class="nav-text">Unified logging system (aka os_log)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streaming-debug-logs-from-the-simulator-to-Terminal"><span class="nav-number">2.</span> <span class="nav-text">Streaming debug logs from the simulator to Terminal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Dance-of-cd"><span class="nav-number">2.</span> <span class="nav-text">Problem: Dance of cd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-Subshell"><span class="nav-number">3.</span> <span class="nav-text">Solution: Subshell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/">
+    <link itemprop="mainEntityOfPage" href="https://haosong.name/2023/03/12/change-directory-and-execute-command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,12 +191,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Viewing debug level logs from iOS simulator | NSHaoSong">
+      <meta itemprop="name" content="Change directory and execute command | NSHaoSong">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Viewing debug level logs from iOS simulator
+          Change directory and execute command
         </h1>
 
         <div class="post-meta-container">
@@ -208,15 +206,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-05-30 09:38:09" itemprop="dateCreated datePublished" datetime="2021-05-30T09:38:09-07:00">2021-05-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-12 12:08:57" itemprop="dateModified" datetime="2023-03-12T12:08:57-07:00">2023-03-12</time>
+      <time title="Created: 2023-03-12 12:07:58 / Modified: 14:15:53" itemprop="dateCreated datePublished" datetime="2023-03-12T12:07:58-07:00">2023-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,20 +230,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Unified-logging-system-aka-os-log"><a href="#Unified-logging-system-aka-os-log" class="headerlink" title="Unified logging system (aka os_log)"></a>Unified logging system (aka <code>os_log</code>)</h2><p>The <a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/os/logging">unified logging system</a> (aka <code>os_log</code>) is the recommended way of logging by Apple. It’s pretty easy to create a logger and log messages at different levels:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> SwiftUI</span><br><span class="line"><span class="keyword">import</span> os.log</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> button <span class="operator">=</span> <span class="type">Logger</span>(subsystem: <span class="string">&quot;name.haosong.OSLogDemo&quot;</span>, category: <span class="string">&quot;Button&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ContentView</span>: <span class="title class_">View</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Button</span>(<span class="string">&quot;Debug&quot;</span>, action: &#123;</span><br><span class="line">                <span class="type">Logger</span>.button.log(level: .debug, <span class="string">&quot;debug log&quot;</span>)</span><br><span class="line">            &#125;).padding()</span><br><span class="line">            </span><br><span class="line">            <span class="type">Button</span>(<span class="string">&quot;Info&quot;</span>, action: &#123;</span><br><span class="line">                <span class="type">Logger</span>.button.log(level: .info, <span class="string">&quot;info log&quot;</span>)</span><br><span class="line">            &#125;).padding()</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>How to change directory, execute a command and get back to where you were earlier?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">cd</span> path/to/some/dir &amp;&amp; ./some-command)</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<p>On macOS, we can view the log messages using the Console app. But the <code>debug</code> level messages from iOS simulators are not visible even after turning on the <code>Include Info Messages</code> and <code>Include Debug Messages</code> in <code>Action</code> menu of the Console app. </p>
-<p>This could be <a target="_blank" rel="noopener" href="https://developer.apple.com/forums/thread/82736?answerId=347949022#347949022">a bug of the simulator</a>, because <code>debug</code> level messages from iOS devices are not affected in the Console app. </p>
-<h2 id="Streaming-debug-logs-from-the-simulator-to-Terminal"><a href="#Streaming-debug-logs-from-the-simulator-to-Terminal" class="headerlink" title="Streaming debug logs from the simulator to Terminal"></a>Streaming debug logs from the simulator to Terminal</h2><p>The workaround is to stream the log from the simulator to Terminal:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if the simulator is already booted</span></span><br><span class="line">$ xcrun simctl spawn booted <span class="built_in">log</span> stream --level debug --predicate <span class="string">&#x27;subsystem == &quot;name.haosong.OSLogDemo&quot;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or you can use the device UUID</span></span><br><span class="line">$ xcrun simctl spawn &lt;DEVICE-UUID&gt; <span class="built_in">log</span> stream --level debug --predicate <span class="string">&#x27;subsystem == &quot;name.haosong.OSLogDemo&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Problem-Dance-of-cd"><a href="#Problem-Dance-of-cd" class="headerlink" title="Problem: Dance of cd"></a>Problem: Dance of <code>cd</code></h2><p>With <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Monorepo">Monorepo</a> setup in many tech companies, we often run into situations that the command we want to run is not located (or not runnable) in the same directory where terminal is at (most likely the root directory of the repo). </p>
+<p>To run the command we have to do a dance of directory changing like this:</p>
+<ol>
+<li>Change directory: <code>cd path/to/some/dir</code> </li>
+<li>Run the command <code>./some-command</code> </li>
+<li><code>cd</code> back to where we were earlier, because many commands of the day-to-day workflow assumes the terminal stays at root directory of a repo</li>
+</ol>
+<h2 id="Solution-Subshell"><a href="#Solution-Subshell" class="headerlink" title="Solution: Subshell"></a>Solution: Subshell</h2><p>To avoid the <code>cd</code> dance back and forth, we can run the command in a <em>subshell</em> by enclosing the command inside parentheses:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">cd</span> path/to/some/dir &amp;&amp; ./some-command)</span><br></pre></td></tr></table></figure>
 
+<p>This is possible because directory changes made in a <em>subshell</em> do not carry over to the parent shell. </p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://developer.apple.com/forums/thread/82736?answerId=347949022#347949022">Console app not showing info and debug logs | Apple Developer Forums</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.iosdev.recipes/simulator/os_log/">Using os_log and log streaming on iOS</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.avanderlee.com/workflow/oslog-unified-logging/">OSLog and Unified logging as recommended by Apple - SwiftLee</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/13624097/change-directory-and-execute-file-in-one-command">Change directory and execute file in one command - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://tldp.org/LDP/abs/html/subshells.html">Advanced Bash-Scripting Guide: Chapter 21. Subshells</a></li>
 </ul>
 
     </div>
@@ -270,7 +267,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/" title="Viewing debug level logs from iOS simulator">https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/</a>
+      <a href="https://haosong.name/2023/03/12/change-directory-and-execute-command/" title="Change directory and execute command">https://haosong.name/2023/03/12/change-directory-and-execute-command/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -279,23 +276,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/ios/" rel="tag"># ios</a>
-              <a href="/tags/debug/" rel="tag"># debug</a>
-              <a href="/tags/os-log/" rel="tag"># os_log</a>
+              <a href="/tags/shell-scripting/" rel="tag"># shell scripting</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/05/29/how-to-call-c-variadic-functions-from-swift/" rel="prev" title="How to call C variadic functions from Swift?">
-                  <i class="fa fa-chevron-left"></i> How to call C variadic functions from Swift?
+                <a href="/2021/05/30/viewing-debug-level-logs-from-ios-simulator/" rel="prev" title="Viewing debug level logs from iOS simulator">
+                  <i class="fa fa-chevron-left"></i> Viewing debug level logs from iOS simulator
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/03/12/change-directory-and-execute-command/" rel="next" title="Change directory and execute command">
-                  Change directory and execute command <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
