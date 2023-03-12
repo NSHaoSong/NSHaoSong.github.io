@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://haosong.name/2021/05/25/signing-git-commits-using-gpg/</loc>
+    <loc>https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/</loc>
     
     <lastmod>2023-03-12</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://haosong.name/2021/05/30/viewing-debug-level-logs-from-ios-simulator/</loc>
+    <loc>https://haosong.name/2021/05/25/signing-git-commits-using-gpg/</loc>
     
     <lastmod>2023-03-12</lastmod>
     
@@ -107,27 +107,6 @@
   </url>
   
   <url>
-    <loc>https://haosong.name/tags/git/</loc>
-    <lastmod>2023-03-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://haosong.name/tags/gpg/</loc>
-    <lastmod>2023-03-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://haosong.name/tags/mac/</loc>
-    <lastmod>2023-03-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://haosong.name/tags/ios/</loc>
     <lastmod>2023-03-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -143,6 +122,27 @@
   
   <url>
     <loc>https://haosong.name/tags/os-log/</loc>
+    <lastmod>2023-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/git/</loc>
+    <lastmod>2023-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/gpg/</loc>
+    <lastmod>2023-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/mac/</loc>
     <lastmod>2023-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

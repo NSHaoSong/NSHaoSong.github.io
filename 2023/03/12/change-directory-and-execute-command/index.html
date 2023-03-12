@@ -28,7 +28,7 @@
 <meta property="og:description" content="TL;DRHow to change directory, execute a command and get back to where you were earlier? 1(cd path&#x2F;to&#x2F;some&#x2F;dir &amp;&amp; .&#x2F;some-command)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-12T19:07:58.000Z">
-<meta property="article:modified_time" content="2023-03-12T22:19:54.537Z">
+<meta property="article:modified_time" content="2023-03-12T22:24:56.771Z">
 <meta property="article:author" content="NSHaoSong">
 <meta property="article:tag" content="shell scripting">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-03-12 12:07:58 / Modified: 15:19:54" itemprop="dateCreated datePublished" datetime="2023-03-12T12:07:58-07:00">2023-03-12</time>
+      <time title="Created: 2023-03-12 12:07:58 / Modified: 15:24:56" itemprop="dateCreated datePublished" datetime="2023-03-12T12:07:58-07:00">2023-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,7 +245,7 @@
 <h2 id="Solution-Subshell"><a href="#Solution-Subshell" class="headerlink" title="Solution: Subshell"></a>Solution: Subshell</h2><p>To avoid the <code>cd</code> dance back and forth, we can run the command in a <em>subshell</em> by enclosing the command inside parentheses:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">cd</span> path/to/some/dir &amp;&amp; ./some-command)</span><br></pre></td></tr></table></figure>
 
-<p>Because directory changes made in a subshell do not carry over to the parent shell, we will stay at the same directory after the command in subshell finishes.</p>
+<p>Because directory changes made in a subshell do not carry over to the parent shell, it will stay at the same directory after the command in subshell finishes.</p>
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>In a monorepo project with both iOS and Android child directories:</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├── <span class="keyword">android</span></span><br><span class="line"><span class="keyword"></span>│   ├── <span class="keyword">build</span></span><br><span class="line"><span class="keyword"></span>│   ├── gradle</span><br><span class="line">│   ├── gradlew</span><br><span class="line">│   ├── lib</span><br><span class="line">│   └── settings.gradle.kts</span><br><span class="line">├── ios</span><br><span class="line">│   ├── Package.<span class="keyword">swift</span></span><br><span class="line"><span class="keyword"></span>│   ├── README.md</span><br><span class="line">│   ├── Sources</span><br><span class="line">│   └── Tests</span><br><span class="line">└── <span class="keyword">scripts</span></span><br><span class="line"><span class="keyword"></span>    └── some-<span class="keyword">script.sh</span></span><br></pre></td></tr></table></figure>
 
