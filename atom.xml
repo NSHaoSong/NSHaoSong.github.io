@@ -6,7 +6,7 @@
   <link href="https://haosong.name/atom.xml" rel="self"/>
   
   <link href="https://haosong.name/"/>
-  <updated>2023-03-14T15:08:48.510Z</updated>
+  <updated>2023-03-26T15:11:57.620Z</updated>
   <id>https://haosong.name/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Generate an informative version name using Git</title>
+    <link href="https://haosong.name/2023/03/26/generate-an-informative-version-name-using-git/"/>
+    <id>https://haosong.name/2023/03/26/generate-an-informative-version-name-using-git/</id>
+    <published>2023-03-26T14:07:43.000Z</published>
+    <updated>2023-03-26T15:11:57.620Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>How do you generate an informative version name like <code>1.0.0-1-gd64d</code> using <code>git</code>?</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git describe --abbrev=4 --dirty --always --tags</span><br></pre></td></tr></table></figure><span id="more"></span><h2 id="What-is-git-describe"><a href="#What-is-git-describe" class="headerlink" title="What is git describe?"></a>What is <code>git describe</code>?</h2><p><a href="https://git-scm.com/docs/git-describe">Git - git-describe Documentation</a>: </p><blockquote><p><strong>NAME</strong><br>git-describe - Give an object a human readable name based on an available ref</p><p><strong>DESCRIPTION</strong><br>The command finds the most recent tag that is reachable from a commit. If the tag points to the commit, then only the tag is shown. Otherwise, it suffixes the tag name with the number of additional commits on top of the tagged object and the abbreviated object name of the most recent commit. The result is a “human-readable” object name which can also be used to identify the commit to other git commands.</p></blockquote><h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git describe --abbrev=4 --dirty --always --tags</span><br></pre></td></tr></table></figure><ul><li><code>--abbrev=4</code>: Use 4 digits or as many digits as needed to form a unique object name.</li><li><code>--dirty</code>: If the working tree has local modification “-dirty” is appended to the result.</li><li><code>--always</code>: Show uniquely abbreviated commit object as fallback.</li><li><code>--tags</code>: Instead of using only the annotated tags, use any tag found in <code>refs/tags</code> namespace.</li></ul><h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><pre><code class="highlight mermaid">gitGraph   commit id: &quot;ab27&quot;   commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;</code></pre><p>Running <code>git describe</code> after the latest commit is tagged with <code>1.0.0</code>:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0 <span class="comment"># returns the latest tag</span></span><br></pre></td></tr></table></figure><pre><code class="highlight mermaid">gitGraph   commit id: &quot;ab27&quot;   commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;   commit id: &quot;d64d&quot;</code></pre><p>Running <code>git describe</code> after commit <code>d64d</code> is made since the <code>1.0.0</code> release:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0-1-gd64d <span class="comment"># suffixes with additional commits info</span></span><br></pre></td></tr></table></figure><p>Here, the suffix <code>-1-gd64d</code> means we are <code>1</code> commit after version <code>1.0.0</code>, <code>d64d</code> is the prefix of the current commit id, and the <code>g</code> here stands for <code>git</code>. </p><pre><code class="highlight mermaid">gitGraph   commit id: &quot;ab27&quot;   commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;   commit id: &quot;d64d&quot;   commit id: &quot;Uncommitted&quot; type: HIGHLIGHT</code></pre><p>If some uncommitted changes are made after <code>d64d</code>, running <code>git describe</code>: </p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0-1-gd64d-dirty <span class="comment"># suffixed &quot;-dirty&quot; for uncommitted changes</span></span><br></pre></td></tr></table></figure><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://stackoverflow.com/questions/1704907/how-can-i-get-my-c-code-to-automatically-print-out-its-git-version-hash">How can I get my C code to automatically print out its Git version hash? - Stack Overflow</a></li><li><a href="https://git-scm.com/docs/git-describe">Git - git-describe Documentation</a></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;&lt;p&gt;How do you generate an informative version name like &lt;code&gt;1.0.0-1-gd64d&lt;/code&gt; using &lt;code&gt;git&lt;/code&gt;?&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git describe --abbrev=4 --dirty --always --tags&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    
+    <category term="git" scheme="https://haosong.name/tags/git/"/>
+    
+    <category term="git describe" scheme="https://haosong.name/tags/git-describe/"/>
+    
+    <category term="version control" scheme="https://haosong.name/tags/version-control/"/>
+    
+  </entry>
   
   <entry>
     <title>Execute command in a different directory</title>
