@@ -193,7 +193,7 @@
     <link href="https://haosong.name/2016/02/16/first-commit/"/>
     <id>https://haosong.name/2016/02/16/first-commit/</id>
     <published>2016-02-17T07:03:09.000Z</published>
-    <updated>2023-02-26T16:08:38.231Z</updated>
+    <updated>2023-04-09T23:17:38.482Z</updated>
     
     <content type="html"><![CDATA[<p>Finally got my blog up with <a href="https://hexo.io/">Hexo</a> and <a href="https://pages.github.com/">GitHub pages</a>. :D </p>]]></content>
     
@@ -209,7 +209,7 @@
     <category term="main" scheme="https://haosong.name/categories/main/"/>
     
     
-    <category term="Hexo" scheme="https://haosong.name/tags/hexo/"/>
+    <category term="hexo" scheme="https://haosong.name/tags/hexo/"/>
     
   </entry>
   

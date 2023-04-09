@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://haosong.name/2016/02/16/first-commit/</loc>
+    
+    <lastmod>2023-04-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/</loc>
     
     <lastmod>2023-04-09</lastmod>
@@ -56,15 +65,6 @@
   </url>
   
   <url>
-    <loc>https://haosong.name/2016/02/16/first-commit/</loc>
-    
-    <lastmod>2023-02-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://haosong.name/tags/index.html</loc>
     
     <lastmod>2021-10-29</lastmod>
@@ -81,13 +81,6 @@
     <priority>1.0</priority>
   </url>
 
-  
-  <url>
-    <loc>https://haosong.name/tags/hexo/</loc>
-    <lastmod>2023-04-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
   
   <url>
     <loc>https://haosong.name/tags/shell-scripting/</loc>
@@ -196,6 +189,13 @@
   
   <url>
     <loc>https://haosong.name/tags/cli/</loc>
+    <lastmod>2023-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/hexo/</loc>
     <lastmod>2023-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
