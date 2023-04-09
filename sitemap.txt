@@ -1,3 +1,4 @@
+https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/
 https://haosong.name/2023/03/26/generate-an-informative-version-name-using-git/
 https://haosong.name/2023/03/12/execute-command-in-a-different-directory/
 https://haosong.name/2021/05/25/signing-git-commits-using-gpg/
@@ -20,5 +21,8 @@ https://haosong.name/tags/variadic-function/
 https://haosong.name/tags/va-list/
 https://haosong.name/tags/git-describe/
 https://haosong.name/tags/version-control/
+https://haosong.name/tags/swift-package-manager/
+https://haosong.name/tags/make/
+https://haosong.name/tags/cli/
 https://haosong.name/categories/main/
 https://haosong.name/categories/programming/
