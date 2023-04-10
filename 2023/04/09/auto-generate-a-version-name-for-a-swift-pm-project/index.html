@@ -28,7 +28,7 @@
 <meta property="og:description" content="Previously, we discussed how to use git describe to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation?">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-09T23:06:41.000Z">
-<meta property="article:modified_time" content="2023-04-09T23:16:31.264Z">
+<meta property="article:modified_time" content="2023-04-10T00:04:40.380Z">
 <meta property="article:author" content="NSHaoSong">
 <meta property="article:tag" content="shell scripting">
 <meta property="article:tag" content="git">
@@ -215,7 +215,16 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-04-09 16:06:41 / Modified: 16:16:31" itemprop="dateCreated datePublished" datetime="2023-04-09T16:06:41-07:00">2023-04-09</time>
+      <time title="Created: 2023-04-09 16:06:41 / Modified: 17:04:40" itemprop="dateCreated datePublished" datetime="2023-04-09T16:06:41-07:00">2023-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+        </span>
     </span>
 
   
@@ -228,7 +237,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><a href="/2023/03/26/generate-an-informative-version-name-using-git/">Previously, we discussed how to use <code>git describe</code> to generate an informative version name of a project</a>. How do we use it in a Swift Package Manager project to automate the version name generation? </p>
+        <p><a href="/2023/03/26/generate-an-informative-version-name-using-git/">Previously</a>, we discussed how to use <code>git describe</code> to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation? </p>
 <span id="more"></span>
 
 <h2 id="Problem-Multiple-sources-of-truth-for-version-info"><a href="#Problem-Multiple-sources-of-truth-for-version-info" class="headerlink" title="Problem: Multiple sources of truth for version info"></a>Problem: Multiple sources of truth for version info</h2><p>It’s a common practice to ship binaries of a program with the version info and provide a way to check the version through its interface.</p>
@@ -273,6 +282,9 @@
 <p>Turns out the good old <code>make</code> command can help us. We can create a <code>Makefile</code> for the project and manage the build process:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gen-git-info:</span><br><span class="line">	./Scripts/gen-git-info.sh</span><br><span class="line"></span><br><span class="line">build: gen-git-info</span><br><span class="line">	swift build</span><br><span class="line"></span><br><span class="line">release: gen-git-info</span><br><span class="line">	swift build -c release</span><br><span class="line"></span><br><span class="line">install: release</span><br><span class="line">	cp ./.build/release/MyCommandLineTool ~/bin</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm -rf .build</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>⚠️<br>Makefiles must be indented using TABs and not spaces or make will fail.</p>
+</blockquote>
 <p>Here, we make the <code>gen-git-info</code> script as the dependency of the <code>build</code> and <code>release</code>, so that the script is guaranteed to run before the <code>swift build</code> command.</p>
 <h3 id="Put-everything-together"><a href="#Put-everything-together" class="headerlink" title="Put everything together"></a>Put everything together</h3><p>Now our project looks like this:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── Makefile</span><br><span class="line">├── Package.resolved</span><br><span class="line">├── Package.swift</span><br><span class="line">├── README.md</span><br><span class="line">├── Scripts</span><br><span class="line">│   └── gen-git-info.sh</span><br><span class="line">└── Sources</span><br><span class="line">    └── MyCommandLineTool</span><br><span class="line">        ├── GitInfo.swift</span><br><span class="line">        └── MyCommandLineTool.swift</span><br></pre></td></tr></table></figure>
@@ -285,6 +297,7 @@
 
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://theswiftdev.com/utilizing-makefiles-for-swift-projects/">Utilizing Makefiles for Swift projects</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/">Makefile Tutorial By Example</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.howtogeek.com/446071/how-to-use-the-echo-command-on-linux/">How to Use the Echo Command on Linux</a></li>
 </ul>
 
