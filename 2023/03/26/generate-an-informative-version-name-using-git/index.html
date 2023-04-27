@@ -18,14 +18,14 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="TL;DRHow do you generate an informative version name like 1.0.0-1-gd64d using git? git describe --abbrev&#x3D;4 --dirty --always --tags">
+    <meta name="description" content="TL;DR How do you generate an informative version name like 1.0.0-1-gd64d using git? git describe --abbrev&#x3D;4 --dirty --always --tags">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Generate an informative version name using Git">
 <meta property="og:url" content="https://haosong.name/2023/03/26/generate-an-informative-version-name-using-git/index.html">
 <meta property="og:site_name" content="NSHaoSong">
-<meta property="og:description" content="TL;DRHow do you generate an informative version name like 1.0.0-1-gd64d using git? git describe --abbrev&#x3D;4 --dirty --always --tags">
+<meta property="og:description" content="TL;DR How do you generate an informative version name like 1.0.0-1-gd64d using git? git describe --abbrev&#x3D;4 --dirty --always --tags">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-26T14:07:43.000Z">
 <meta property="article:modified_time" content="2023-04-09T18:04:20.916Z">
@@ -84,6 +84,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -92,11 +93,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -139,7 +166,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -238,50 +265,48 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>How do you generate an informative version name like <code>1.0.0-1-gd64d</code> using <code>git</code>?</p>
+        <h2 id="TL-DR">TL;DR<a class="header-anchor" href="#TL-DR"></a></h2>
+<p>How do you generate an informative version name like <code>1.0.0-1-gd64d</code> using <code>git</code>?</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git describe --abbrev=4 --dirty --always --tags</span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
-<h2 id="What-is-git-describe"><a href="#What-is-git-describe" class="headerlink" title="What is git describe?"></a>What is <code>git describe</code>?</h2><p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-describe">Git - git-describe Documentation</a>: </p>
+<h2 id="What-is-git-describe">What is <code>git describe</code>?<a class="header-anchor" href="#What-is-git-describe"></a></h2>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-describe">Git - git-describe Documentation</a>:</p>
 <blockquote>
-<p><strong>NAME</strong><br>git-describe - Give an object a human readable name based on an available ref</p>
-<p><strong>DESCRIPTION</strong><br>The command finds the most recent tag that is reachable from a commit. If the tag points to the commit, then only the tag is shown. Otherwise, it suffixes the tag name with the number of additional commits on top of the tagged object and the abbreviated object name of the most recent commit. The result is a “human-readable” object name which can also be used to identify the commit to other git commands.</p>
+<p><strong>NAME</strong><br>
+git-describe - Give an object a human readable name based on an available ref</p>
+<p><strong>DESCRIPTION</strong><br>
+The command finds the most recent tag that is reachable from a commit. If the tag points to the commit, then only the tag is shown. Otherwise, it suffixes the tag name with the number of additional commits on top of the tagged object and the abbreviated object name of the most recent commit. The result is a “human-readable” object name which can also be used to identify the commit to other git commands.</p>
 </blockquote>
-<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git describe --abbrev=4 --dirty --always --tags</span><br></pre></td></tr></table></figure>
-
+<h2 id="Explanation">Explanation<a class="header-anchor" href="#Explanation"></a></h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git describe --abbrev=4 --dirty --always --tags</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>--abbrev=4</code>: Use 4 digits or as many digits as needed to form a unique object name.</li>
 <li><code>--dirty</code>: If the working tree has local modification “-dirty” is appended to the result.</li>
 <li><code>--always</code>: Show uniquely abbreviated commit object as fallback.</li>
 <li><code>--tags</code>: Instead of using only the annotated tags, use any tag found in <code>refs/tags</code> namespace.</li>
 </ul>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><pre><code class="highlight mermaid">gitGraph
+<h2 id="Examples">Examples<a class="header-anchor" href="#Examples"></a></h2>
+<pre><code class="highlight mermaid">gitGraph
    commit id: &quot;ab27&quot;
    commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;</code></pre>
-
 <p>Running <code>git describe</code> after the latest commit is tagged with <code>1.0.0</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0 <span class="comment"># returns the latest tag</span></span><br></pre></td></tr></table></figure>
-
 <pre><code class="highlight mermaid">gitGraph
    commit id: &quot;ab27&quot;
    commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;
    commit id: &quot;d64d&quot;</code></pre>
-
 <p>Running <code>git describe</code> after commit <code>d64d</code> is made since the <code>1.0.0</code> release:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0-1-gd64d <span class="comment"># suffixes with additional commits info</span></span><br></pre></td></tr></table></figure>
-
-<p>Here, the suffix <code>-1-gd64d</code> means we are <code>1</code> commit after version <code>1.0.0</code>, <code>d64d</code> is the prefix of the current commit id, and the <code>g</code> here stands for <code>git</code>. </p>
+<p>Here, the suffix <code>-1-gd64d</code> means we are <code>1</code> commit after version <code>1.0.0</code>, <code>d64d</code> is the prefix of the current commit id, and the <code>g</code> here stands for <code>git</code>.</p>
 <pre><code class="highlight mermaid">gitGraph
    commit id: &quot;ab27&quot;
    commit id: &quot;e9a9&quot; tag: &quot;v1.0.0&quot;
    commit id: &quot;d64d&quot;
    commit id: &quot;Uncommitted&quot; type: HIGHLIGHT</code></pre>
-
-<p>If some uncommitted changes are made after <code>d64d</code>, running <code>git describe</code>: </p>
+<p>If some uncommitted changes are made after <code>d64d</code>, running <code>git describe</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git describe --abbrev=4 --dirty --always --tags</span><br><span class="line">1.0.0-1-gd64d-dirty <span class="comment"># suffixed &quot;-dirty&quot; for uncommitted changes</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<h2 id="References">References<a class="header-anchor" href="#References"></a></h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-describe">Git - git-describe Documentation</a></li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1704907/how-can-i-get-my-c-code-to-automatically-print-out-its-git-version-hash">How can I get my C code to automatically print out its Git version hash? - Stack Overflow</a></li>
 </ul>
@@ -375,7 +400,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
