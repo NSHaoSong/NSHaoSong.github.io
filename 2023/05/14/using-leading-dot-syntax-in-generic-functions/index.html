@@ -28,7 +28,7 @@
 <meta property="og:description" content="Leading dot syntax in Swift The “leading dot syntax” is an important feature in Swift to provide clean and concise APIs for callers. It supports enums and static members. Let’s say we have an ItemStor">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-14T22:27:02.000Z">
-<meta property="article:modified_time" content="2023-05-14T22:40:44.231Z">
+<meta property="article:modified_time" content="2023-05-14T22:44:33.312Z">
 <meta property="article:author" content="NSHaoSong">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="generics">
@@ -237,7 +237,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-05-14 15:27:02 / Modified: 15:40:44" itemprop="dateCreated datePublished" datetime="2023-05-14T15:27:02-07:00">2023-05-14</time>
+      <time title="Created: 2023-05-14 15:27:02 / Modified: 15:44:33" itemprop="dateCreated datePublished" datetime="2023-05-14T15:27:02-07:00">2023-05-14</time>
     </span>
 
   
@@ -258,6 +258,7 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.one)</span><br></pre></td></tr></table></figure>
 <p>Alternatively, we can change <code>Item</code> to <code>struct</code> and declare commonly used values as the static variables to make them available in leading dot syntax:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="type">Item</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.someItem) <span class="comment">// dot syntax works for static members too</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 <h2 id="The-problem-Generic-functions-ft-static-members">The problem: Generic functions ft. static members<a class="header-anchor" href="#The-problem-Generic-functions-ft-static-members"></a></h2>
 <p>Let’s say we want to expand <code>ItemStorage</code> to support any types that conform to a protocol <code>StorableItem</code>:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protocol</span> <span class="title class_">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ItemStorage</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">store</span>&lt;<span class="type">I</span>: <span class="type">StorableItem</span>&gt;(<span class="keyword">_</span> <span class="params">item</span>: <span class="type">I</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
