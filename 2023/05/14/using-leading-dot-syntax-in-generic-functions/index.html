@@ -28,7 +28,7 @@
 <meta property="og:description" content="Leading dot syntax in Swift The “leading dot syntax” is an important feature in Swift to provide clean and concise APIs for callers. It supports enums and static members. Let’s say we have an ItemStor">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-14T22:27:02.000Z">
-<meta property="article:modified_time" content="2023-05-14T22:44:33.312Z">
+<meta property="article:modified_time" content="2023-05-14T23:23:13.064Z">
 <meta property="article:author" content="NSHaoSong">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="generics">
@@ -237,7 +237,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-05-14 15:27:02 / Modified: 15:44:33" itemprop="dateCreated datePublished" datetime="2023-05-14T15:27:02-07:00">2023-05-14</time>
+      <time title="Created: 2023-05-14 15:27:02 / Modified: 16:23:13" itemprop="dateCreated datePublished" datetime="2023-05-14T15:27:02-07:00">2023-05-14</time>
     </span>
 
   
@@ -264,7 +264,7 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protocol</span> <span class="title class_">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ItemStorage</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">store</span>&lt;<span class="type">I</span>: <span class="type">StorableItem</span>&gt;(<span class="keyword">_</span> <span class="params">item</span>: <span class="type">I</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>We can make the existing <code>Item</code> struct conform to the new protocol because it already has the <code>identifier</code> property:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Item</span>: <span class="title class_">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="type">Item</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>But <code>.someItem</code>no longer works:</p>
+<p>But <code>.someItem</code> no longer works:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.someItem) <span class="comment">// ❌ type &#x27;StorableItem&#x27; has no member &#x27;someItem&#x27;</span></span><br></pre></td></tr></table></figure>
 <h2 id="The-solution">The solution<a class="header-anchor" href="#The-solution"></a></h2>
 <p>In Swift 5.5, leading dot syntax is extended to support static member lookup declared in the extension of protocols if the declaring extension or member itself constrains <code>Self</code> to be a concrete type<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
