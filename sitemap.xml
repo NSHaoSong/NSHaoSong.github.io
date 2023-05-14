@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://haosong.name/2023/05/14/using-leading-dot-syntax-in-generic-functions/</loc>
+    
+    <lastmod>2023-05-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://haosong.name/2021/05/25/signing-git-commits-using-gpg/</loc>
     
     <lastmod>2023-04-27</lastmod>
@@ -76,7 +85,7 @@
 
   <url>
     <loc>https://haosong.name/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -84,126 +93,140 @@
   
   <url>
     <loc>https://haosong.name/tags/git/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/git-describe/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/version-control/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/shell-scripting/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/swift/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/swift-package-manager/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/make/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/cli/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/hexo/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/c/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/variadic-function/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/va-list/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/gpg/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/mac/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/pinentry/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/ios/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/debug/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/tags/os-log/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/generics/</loc>
+    <lastmod>2023-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://haosong.name/tags/leading-dot-syntax/</loc>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -212,14 +235,14 @@
   
   <url>
     <loc>https://haosong.name/categories/programming/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://haosong.name/categories/main/</loc>
-    <lastmod>2023-04-27</lastmod>
+    <lastmod>2023-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
