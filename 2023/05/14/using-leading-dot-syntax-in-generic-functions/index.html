@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -16,9 +16,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Leading dot syntax in Swift The “leading dot syntax” is an important feature in Swift to provide clean and concise APIs for callers. It supports enums and static members. Let’s say we have an ItemStor">
 <meta property="og:type" content="article">
@@ -37,7 +37,6 @@
 
 
 <link rel="canonical" href="https://haosong.name/2023/05/14/using-leading-dot-syntax-in-generic-functions/">
-
 
 
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/05/14/using-leading-dot-syntax-in-generic-functions/","path":"2023/05/14/using-leading-dot-syntax-in-generic-functions/","title":"Using leading dot syntax in generic functions"}</script>
@@ -103,25 +102,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -262,13 +261,13 @@
 <p>Let’s say we want to expand <code>ItemStorage</code> to support any types that conform to a protocol <code>StorableItem</code>:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protocol</span> <span class="title class_">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ItemStorage</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">store</span>&lt;<span class="type">I</span>: <span class="type">StorableItem</span>&gt;(<span class="keyword">_</span> <span class="params">item</span>: <span class="type">I</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>We can make the existing <code>Item</code> struct conform to the new protocol because it already has the <code>identifier</code> property:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Item</span>: <span class="title class_">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="type">Item</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Item</span>: <span class="title class_ inherited__">StorableItem</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> identifier: <span class="type">String</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="type">Item</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>But <code>.someItem</code> no longer works:</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.someItem) <span class="comment">// ❌ type &#x27;StorableItem&#x27; has no member &#x27;someItem&#x27;</span></span><br></pre></td></tr></table></figure>
 <h2 id="The-solution">The solution<a class="header-anchor" href="#The-solution"></a></h2>
 <p>In Swift 5.5, leading dot syntax is extended to support static member lookup declared in the extension of protocols if the declaring extension or member itself constrains <code>Self</code> to be a concrete type<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
 <p>Here’s how to fix our example:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">StorableItem</span> <span class="title class_">where</span> <span class="title class_">Self</span> == <span class="title class_">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="keyword">Self</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.someItem) <span class="comment">// ✅ this works now!</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">StorableItem</span> <span class="keyword">where</span> <span class="keyword">Self</span> <span class="operator">==</span> <span class="type">Item</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> someItem: <span class="keyword">Self</span> &#123; .<span class="keyword">init</span>(identifier: <span class="string">&quot;some-item&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> storage <span class="operator">=</span> <span class="type">ItemStorage</span>()</span><br><span class="line">storage.store(.someItem) <span class="comment">// ✅ this works now!</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>ℹ️ <strong>Note</strong></p>
 <p><code>where Self == Item</code> in the extension is the key part, which makes sure <code>Self</code> is bound to a concrete type <code>Item</code>.</p>
@@ -343,7 +342,7 @@
 
   <div class="copyright">
     &copy; 2016 – 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -356,6 +355,12 @@
   </footer>
 
   
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
   <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
@@ -368,13 +373,13 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js","integrity":"sha256-mm3Re3y7xlvh+yCD+l/Zs1d+PU0AEad93MkWvljfm/s="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
 

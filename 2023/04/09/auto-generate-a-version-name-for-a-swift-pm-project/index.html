@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -16,9 +16,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Previously, we discussed how to use git describe to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation?">
 <meta property="og:type" content="article">
@@ -42,7 +42,6 @@
 
 
 <link rel="canonical" href="https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/">
-
 
 
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/","path":"2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/","title":"Auto-generate a version name for a Swift PM project"}</script>
@@ -108,25 +107,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -270,7 +269,7 @@
 <p>Let’s say we are building a command line program in Swift using Swift Package Manager:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── Package.resolved</span><br><span class="line">├── Package.swift</span><br><span class="line">├── README.md</span><br><span class="line">└── Sources</span><br><span class="line">    └── MyCommandLineTool</span><br><span class="line">        └── MyCommandLineTool.swift</span><br></pre></td></tr></table></figure>
 <p>In the main source file <code>MyCommandLineTool.swift</code>, the <code>version</code> is defined as a string constant <code>&quot;1.2.3&quot;</code>.</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="comment">/// Version Constant</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> version <span class="operator">=</span> <span class="string">&quot;1.2.3&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: version <span class="comment">// Make the version available to the CLI</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">mutating</span> <span class="keyword">func</span> <span class="title function_">run</span>() <span class="keyword">throws</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_ inherited__">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="comment">/// Version Constant</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> version <span class="operator">=</span> <span class="string">&quot;1.2.3&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: version <span class="comment">// Make the version available to the CLI</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">mutating</span> <span class="keyword">func</span> <span class="title function_">run</span>() <span class="keyword">throws</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Thanks to <a target="_blank" rel="noopener" href="https://github.com/apple/swift-argument-parser">Swift Argument Parser</a>, making the version available to the command line is very easy. We can check the version number by passing in the <code>--version</code> flag:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ swift build</span><br><span class="line">Building <span class="keyword">for</span> debugging...</span><br><span class="line">[4/4] Linking MyCommandLineTool</span><br><span class="line">Build complete! (0.66s)</span><br><span class="line"></span><br><span class="line">$ ./.build/debug/MyCommandLineTool --version</span><br><span class="line">1.2.3</span><br></pre></td></tr></table></figure>
 <p>Creating a <code>git</code> tag for each release is also a common practice. In this example, we can tag this release with <code>1.2.3</code>:</p>
@@ -292,7 +291,7 @@
 The <code>version</code> string has a <code>-dirty</code> suffix because we have uncommitted changes.</p>
 </blockquote>
 <p>Finally, we can update the main <code>MyCommandLineTool.swift</code> file to read the new auto-generated version number:</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: <span class="type">GitInfo</span>.version <span class="comment">// Read auto-generated version</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_ inherited__">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: <span class="type">GitInfo</span>.version <span class="comment">// Read auto-generated version</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Now, let’s check the result:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ swift build</span><br><span class="line">Building <span class="keyword">for</span> debugging...</span><br><span class="line">[5/5] Linking MyCommandLineTool</span><br><span class="line">Build complete! (0.65s)</span><br><span class="line"></span><br><span class="line">$ ./.build/debug/MyCommandLineTool --version</span><br><span class="line">1.2.3-dirty</span><br></pre></td></tr></table></figure>
 <p>🙌  auto-generated version string is printed out!</p>
@@ -388,7 +387,7 @@ Makefiles <strong>must</strong> be indented using TABs and not spaces or <code>m
 
   <div class="copyright">
     &copy; 2016 – 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -401,6 +400,12 @@ Makefiles <strong>must</strong> be indented using TABs and not spaces or <code>m
   </footer>
 
   
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
   <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
@@ -413,13 +418,13 @@ Makefiles <strong>must</strong> be indented using TABs and not spaces or <code>m
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js","integrity":"sha256-mm3Re3y7xlvh+yCD+l/Zs1d+PU0AEad93MkWvljfm/s="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
 

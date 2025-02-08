@@ -23,10 +23,10 @@ https://haosong.name/tags/va-list/
 https://haosong.name/tags/gpg/
 https://haosong.name/tags/mac/
 https://haosong.name/tags/pinentry/
+https://haosong.name/tags/generics/
+https://haosong.name/tags/leading-dot-syntax/
 https://haosong.name/tags/ios/
 https://haosong.name/tags/debug/
 https://haosong.name/tags/os-log/
-https://haosong.name/tags/generics/
-https://haosong.name/tags/leading-dot-syntax/
 https://haosong.name/categories/programming/
 https://haosong.name/categories/main/
