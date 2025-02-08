@@ -309,6 +309,9 @@ The command finds the most recent tag that is reachable from a commit. If the ta
 </ol>
 </section>
 ]]></content>
+      <categories>
+        <category>programming</category>
+      </categories>
       <tags>
         <tag>swift</tag>
         <tag>generics</tag>
