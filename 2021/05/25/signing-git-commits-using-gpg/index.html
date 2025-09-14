@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="mask-icon" href="/logo.svg" color="#222">
+  <link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Installation To sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). $ brew install gpg pinentry-mac Setup GPG Run the following command to set pine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Signing Git commits using GPG">
+<meta property="og:url" content="https://haosong.name/2021/05/25/signing-git-commits-using-gpg/index.html">
+<meta property="og:site_name" content="NSHaoSong">
+<meta property="og:description" content="Installation To sign git commits on macOS, we need to install gpg and pinentry-mac (for storing passphrase in keychain). $ brew install gpg pinentry-mac Setup GPG Run the following command to set pine">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-25T21:59:02.000Z">
+<meta property="article:modified_time" content="2025-05-31T15:49:04.620Z">
+<meta property="article:author" content="NSHaoSong">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="gpg">
+<meta property="article:tag" content="mac">
+<meta property="article:tag" content="pinentry">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://haosong.name/2021/05/25/signing-git-commits-using-gpg/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2021/05/25/signing-git-commits-using-gpg/","path":"2021/05/25/signing-git-commits-using-gpg/","title":"Signing Git commits using GPG"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Signing Git commits using GPG | NSHaoSong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="NSHaoSong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">NSHaoSong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup-GPG"><span class="nav-number">2.</span> <span class="nav-text">Setup GPG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generate-a-GPG-key"><span class="nav-number">3.</span> <span class="nav-text">Generate a GPG key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Confirm-GPG-is-working"><span class="nav-number">4.</span> <span class="nav-text">Confirm GPG is working</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-GPG-signing-key-in-Git"><span class="nav-number">5.</span> <span class="nav-text">Set GPG signing key in Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-GPG-key-to-GitHub"><span class="nav-number">6.</span> <span class="nav-text">Add GPG key to GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">7.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NSHaoSong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NSHaoSong" title="Github → https:&#x2F;&#x2F;github.com&#x2F;NSHaoSong" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mastodon.social/@NSHaoSong" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@NSHaoSong" rel="noopener me" target="_blank"><i class="fab fa-mastodon fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://haosong.name/2021/05/25/signing-git-commits-using-gpg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NSHaoSong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NSHaoSong">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Signing Git commits using GPG | NSHaoSong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Signing Git commits using GPG
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-25 14:59:02" itemprop="dateCreated datePublished" datetime="2021-05-25T14:59:02-07:00">2021-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-31 08:49:04" itemprop="dateModified" datetime="2025-05-31T08:49:04-07:00">2025-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Installation">Installation<a class="header-anchor" href="#Installation"></a></h2>
+<p>To sign git commits on macOS, we need to install <code>gpg</code> and <code>pinentry-mac</code> (for storing passphrase in keychain).</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install gpg pinentry-mac</span><br></pre></td></tr></table></figure>
+<h2 id="Setup-GPG">Setup GPG<a class="header-anchor" href="#Setup-GPG"></a></h2>
+<p>Run the following command to set <code>pinentry-mac</code> as <code>pinentry-program</code> in <code>~/.gnupg/gpg-agent.conf</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;pinentry-program <span class="subst">$(brew --prefix)</span>/bin/pinentry-mac&quot;</span> &gt;&gt; ~/.gnupg/gpg-agent.conf</span><br></pre></td></tr></table></figure>
+<p>Add the following line to <code>~/.gnupg/gpg.conf</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use-agent</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="Generate-a-GPG-key">Generate a GPG key<a class="header-anchor" href="#Generate-a-GPG-key"></a></h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --full-generate-key</span><br></pre></td></tr></table></figure>
+<p>Follow the instruction here: <a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/generating-a-new-gpg-key">Generating a new GPG key</a></p>
+<h2 id="Confirm-GPG-is-working">Confirm GPG is working<a class="header-anchor" href="#Confirm-GPG-is-working"></a></h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span> | gpg --clearsign</span><br></pre></td></tr></table></figure>
+<p>We can restart gpg agent if needed:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpgconf --<span class="built_in">kill</span> gpg-agent</span><br><span class="line">$ gpgconf --launch gpg-agent</span><br></pre></td></tr></table></figure>
+<h2 id="Set-GPG-signing-key-in-Git">Set GPG signing key in Git<a class="header-anchor" href="#Set-GPG-signing-key-in-Git"></a></h2>
+<p>List all the keys:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --list-secret-keys --keyid-format LONG</span><br></pre></td></tr></table></figure>
+<p>In the output find out the Key ID with the following format (assuming we picked <code>RSA</code> and <code>4096</code> bits key size when generating GPG key):</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">sec   rsa4096/&#123;KEY-ID&#125; </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Tell git which key to use:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.signingkey &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
+<p>To sign all commits automatically:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>To sign all tags automatically:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global tag.forceSignAnnotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="Add-GPG-key-to-GitHub">Add GPG key to GitHub<a class="header-anchor" href="#Add-GPG-key-to-GitHub"></a></h2>
+<p>Print the GPG key:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gpg --armor --<span class="built_in">export</span> &#123;KEY-ID&#125;</span><br></pre></td></tr></table></figure>
+<p>Copy the GPG key, beginning with <code>-----BEGIN PGP PUBLIC KEY BLOCK-----</code> and ending with <code>-----END PGP PUBLIC KEY BLOCK-----</code>, and <a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account">add it to GitHub SSH and GPG keys Settings</a>.</p>
+<h2 id="References">References<a class="header-anchor" href="#References"></a></h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://merikan.com/2019/05/how-to-sign-git-commits/">How to Sign Git Commits</a></li>
+<li><a target="_blank" rel="noopener" href="https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html">How (and why) to sign Git commits</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/telling-git-about-your-signing-key">Telling Git about your signing key</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/generating-a-new-gpg-key">Generating a new GPG key</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account">Adding a new GPG key to your GitHub account</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>NSHaoSong
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://haosong.name/2021/05/25/signing-git-commits-using-gpg/" title="Signing Git commits using GPG">https://haosong.name/2021/05/25/signing-git-commits-using-gpg/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/gpg/" rel="tag"># gpg</a>
+              <a href="/tags/mac/" rel="tag"># mac</a>
+              <a href="/tags/pinentry/" rel="tag"># pinentry</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/02/16/first-commit/" rel="prev" title="first commit">
+                  <i class="fa fa-angle-left"></i> first commit
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/29/how-to-call-c-variadic-functions-from-swift/" rel="next" title="How to call C variadic functions from Swift?">
+                  How to call C variadic functions from Swift? <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2016 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NSHaoSong</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

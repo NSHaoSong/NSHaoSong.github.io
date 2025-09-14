@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="mask-icon" href="/logo.svg" color="#222">
+  <link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"haosong.name","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Previously, we discussed how to use git describe to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Auto-generate a version name for a Swift PM project">
+<meta property="og:url" content="https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/index.html">
+<meta property="og:site_name" content="NSHaoSong">
+<meta property="og:description" content="Previously, we discussed how to use git describe to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation?">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-09T23:06:41.000Z">
+<meta property="article:modified_time" content="2025-05-31T15:49:04.619Z">
+<meta property="article:author" content="NSHaoSong">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="git describe">
+<meta property="article:tag" content="version control">
+<meta property="article:tag" content="shell scripting">
+<meta property="article:tag" content="swift">
+<meta property="article:tag" content="swift package manager">
+<meta property="article:tag" content="make">
+<meta property="article:tag" content="cli">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/","path":"2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/","title":"Auto-generate a version name for a Swift PM project"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Auto-generate a version name for a Swift PM project | NSHaoSong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="NSHaoSong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">NSHaoSong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Multiple-sources-of-truth-for-version-info"><span class="nav-number">1.</span> <span class="nav-text">Problem: Multiple sources of truth for version info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Auto-generate-GitInfo-swift"><span class="nav-number">2.1.</span> <span class="nav-text">Auto-generate GitInfo.swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ignore-the-GitInfo-swift-file"><span class="nav-number">2.2.</span> <span class="nav-text">Ignore the GitInfo.swift file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Makefile-to-manage-build-tasks"><span class="nav-number">2.3.</span> <span class="nav-text">Use Makefile to manage build tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Put-everything-together"><span class="nav-number">2.4.</span> <span class="nav-text">Put everything together</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NSHaoSong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NSHaoSong" title="Github → https:&#x2F;&#x2F;github.com&#x2F;NSHaoSong" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mastodon.social/@NSHaoSong" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@NSHaoSong" rel="noopener me" target="_blank"><i class="fab fa-mastodon fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NSHaoSong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NSHaoSong">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Auto-generate a version name for a Swift PM project | NSHaoSong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Auto-generate a version name for a Swift PM project
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-04-09 16:06:41" itemprop="dateCreated datePublished" datetime="2023-04-09T16:06:41-07:00">2023-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-31 08:49:04" itemprop="dateModified" datetime="2025-05-31T08:49:04-07:00">2025-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><a href="/2023/03/26/generate-an-informative-version-name-using-git/">Previously</a>, we discussed how to use <code>git describe</code> to generate an informative version name of a project. How do we use it in a Swift Package Manager project to automate the version name generation?</p>
+<span id="more"></span>
+<h2 id="Problem-Multiple-sources-of-truth-for-version-info">Problem: Multiple sources of truth for version info<a class="header-anchor" href="#Problem-Multiple-sources-of-truth-for-version-info"></a></h2>
+<p>It’s a common practice to ship binaries of a program with the version info and provide a way to check the version through its interface.</p>
+<p>Let’s say we are building a command line program in Swift using Swift Package Manager:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── Package.resolved</span><br><span class="line">├── Package.swift</span><br><span class="line">├── README.md</span><br><span class="line">└── Sources</span><br><span class="line">    └── MyCommandLineTool</span><br><span class="line">        └── MyCommandLineTool.swift</span><br></pre></td></tr></table></figure>
+<p>In the main source file <code>MyCommandLineTool.swift</code>, the <code>version</code> is defined as a string constant <code>&quot;1.2.3&quot;</code>.</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_ inherited__">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="comment">/// Version Constant</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> version <span class="operator">=</span> <span class="string">&quot;1.2.3&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: version <span class="comment">// Make the version available to the CLI</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">mutating</span> <span class="keyword">func</span> <span class="title function_">run</span>() <span class="keyword">throws</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Thanks to <a target="_blank" rel="noopener" href="https://github.com/apple/swift-argument-parser">Swift Argument Parser</a>, making the version available to the command line is very easy. We can check the version number by passing in the <code>--version</code> flag:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ swift build</span><br><span class="line">Building <span class="keyword">for</span> debugging...</span><br><span class="line">[4/4] Linking MyCommandLineTool</span><br><span class="line">Build complete! (0.66s)</span><br><span class="line"></span><br><span class="line">$ ./.build/debug/MyCommandLineTool --version</span><br><span class="line">1.2.3</span><br></pre></td></tr></table></figure>
+<p>Creating a <code>git</code> tag for each release is also a common practice. In this example, we can tag this release with <code>1.2.3</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a 1.2.3</span><br></pre></td></tr></table></figure>
+<p>This works but is not ideal, because there are two places holding the same version that may get out of sync:</p>
+<ul>
+<li>A string constant in the source code</li>
+<li>A <code>git</code> tag of the project repository</li>
+</ul>
+<p>How can we consolidate the version into one place? We know it’s possible to generate a pretty informative version name using <code>git describe</code> as discussed in the previous post, so why not write an easy script to automate this version generate process?</p>
+<h2 id="Solution">Solution<a class="header-anchor" href="#Solution"></a></h2>
+<h3 id="Auto-generate-GitInfo-swift">Auto-generate <code>GitInfo.swift</code><a class="header-anchor" href="#Auto-generate-GitInfo-swift"></a></h3>
+<p>Let’s create a script <code>Scripts/gen-git-info.sh</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Define the output Swift file</span></span><br><span class="line">version_file=<span class="string">&quot;Sources/MyCommandLineTool/GitInfo.swift&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Generate &quot;git_version&quot; string</span></span><br><span class="line">git_version=$(git describe --abbrev=4 --dirty --always --tags)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Saving the version string to the output Swift file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/// Auto-Generated Git Info.</span></span><br><span class="line"><span class="string">/// DO NOT EDIT!</span></span><br><span class="line"><span class="string">enum GitInfo &#123;</span></span><br><span class="line"><span class="string">    static let version = \&quot;<span class="variable">$git_version</span>\&quot;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&quot;</span> &gt; <span class="variable">$version_file</span></span><br></pre></td></tr></table></figure>
+<p>Running this script will generate a new file <code>Sources/MyCommandLineTool/GitInfo.swift</code>:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// Auto-Generated Git Info.</span></span><br><span class="line"><span class="comment">/// DO NOT EDIT!</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">GitInfo</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> version <span class="operator">=</span> <span class="string">&quot;1.2.3-dirty&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ℹ️ <strong>NOTE</strong><br>
+The <code>version</code> string has a <code>-dirty</code> suffix because we have uncommitted changes.</p>
+</blockquote>
+<p>Finally, we can update the main <code>MyCommandLineTool.swift</code> file to read the new auto-generated version number:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ArgumentParser</span><br><span class="line"></span><br><span class="line"><span class="keyword">@main</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MyCommandLineTool</span>: <span class="title class_ inherited__">ParsableCommand</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="type">CommandConfiguration</span>(</span><br><span class="line">        commandName: <span class="string">&quot;MyCommandLineTool&quot;</span>,</span><br><span class="line">        abstract: <span class="string">&quot;This is MyCommandLineTool&quot;</span>,</span><br><span class="line">        version: <span class="type">GitInfo</span>.version <span class="comment">// Read auto-generated version</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now, let’s check the result:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ swift build</span><br><span class="line">Building <span class="keyword">for</span> debugging...</span><br><span class="line">[5/5] Linking MyCommandLineTool</span><br><span class="line">Build complete! (0.65s)</span><br><span class="line"></span><br><span class="line">$ ./.build/debug/MyCommandLineTool --version</span><br><span class="line">1.2.3-dirty</span><br></pre></td></tr></table></figure>
+<p>🙌  auto-generated version string is printed out!</p>
+<h3 id="Ignore-the-GitInfo-swift-file">Ignore the <code>GitInfo.swift</code> file<a class="header-anchor" href="#Ignore-the-GitInfo-swift-file"></a></h3>
+<p>Because the <code>GitInfo.swift</code> file is auto-generated based on the info from the <code>git</code> repo, committing this file into the repo will affect the versing string generated from <code>git describe</code>. It’s better to make sure we don’t commit the file by adding it to <code>.gitignore</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Other ignored files ...</span><br><span class="line"></span><br><span class="line"># Ignore auto-generated git version file</span><br><span class="line">Sources/MyCommandLineTool/GitInfo.swift</span><br></pre></td></tr></table></figure>
+<h3 id="Use-Makefile-to-manage-build-tasks">Use <code>Makefile</code> to manage build tasks<a class="header-anchor" href="#Use-Makefile-to-manage-build-tasks"></a></h3>
+<p>Everything works so far, but we have to remember to run the <code>gen-git-info.sh</code> script manually every time before building. How can we automate this process?</p>
+<p>Turns out the good old <code>make</code> command can help us. We can create a <code>Makefile</code> for the project and manage the build process:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gen-git-info:</span><br><span class="line">	./Scripts/gen-git-info.sh</span><br><span class="line"></span><br><span class="line">build: gen-git-info</span><br><span class="line">	swift build</span><br><span class="line"></span><br><span class="line">release: gen-git-info</span><br><span class="line">	swift build -c release</span><br><span class="line"></span><br><span class="line">install: release</span><br><span class="line">	cp ./.build/release/MyCommandLineTool ~/bin</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm -rf .build</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️<br>
+Makefiles <strong>must</strong> be indented using TABs and not spaces or <code>make</code> will fail.</p>
+</blockquote>
+<p>Here, we make the <code>gen-git-info</code> script as the dependency of the <code>build</code> and <code>release</code>, so that the script is guaranteed to run before the <code>swift build</code> command.</p>
+<h3 id="Put-everything-together">Put everything together<a class="header-anchor" href="#Put-everything-together"></a></h3>
+<p>Now our project looks like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── Makefile</span><br><span class="line">├── Package.resolved</span><br><span class="line">├── Package.swift</span><br><span class="line">├── README.md</span><br><span class="line">├── Scripts</span><br><span class="line">│   └── gen-git-info.sh</span><br><span class="line">└── Sources</span><br><span class="line">    └── MyCommandLineTool</span><br><span class="line">        ├── GitInfo.swift</span><br><span class="line">        └── MyCommandLineTool.swift</span><br></pre></td></tr></table></figure>
+<p>To build a <em>debug</em> build, we can run <code>make build</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make build</span><br><span class="line">./Scripts/gen-git-info.sh</span><br><span class="line">swift build</span><br><span class="line">Building <span class="keyword">for</span> debugging...</span><br><span class="line">[3/3] Emitting module MyCommandLineTool</span><br><span class="line">Build complete! (0.34s)</span><br></pre></td></tr></table></figure>
+<p>To build a <em>release</em> build and install it to the <code>~/bin</code> directory we can run <code>make install</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make install</span><br><span class="line">./Scripts/gen-git-info.sh</span><br><span class="line">swift build -c release</span><br><span class="line">Building <span class="keyword">for</span> production...</span><br><span class="line">[2/2] Compiling MyCommandLineTool GitInfo.swift</span><br><span class="line">Build complete! (0.39s)</span><br><span class="line"><span class="built_in">cp</span> ./.build/release/MyCommandLineTool ~/bin</span><br></pre></td></tr></table></figure>
+<h2 id="References">References<a class="header-anchor" href="#References"></a></h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://theswiftdev.com/utilizing-makefiles-for-swift-projects/">Utilizing Makefiles for Swift projects</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com">Makefile Tutorial By Example</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.howtogeek.com/446071/how-to-use-the-echo-command-on-linux/">How to Use the Echo Command on Linux</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>NSHaoSong
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/" title="Auto-generate a version name for a Swift PM project">https://haosong.name/2023/04/09/auto-generate-a-version-name-for-a-swift-pm-project/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/git-describe/" rel="tag"># git describe</a>
+              <a href="/tags/version-control/" rel="tag"># version control</a>
+              <a href="/tags/shell-scripting/" rel="tag"># shell scripting</a>
+              <a href="/tags/swift/" rel="tag"># swift</a>
+              <a href="/tags/swift-package-manager/" rel="tag"># swift package manager</a>
+              <a href="/tags/make/" rel="tag"># make</a>
+              <a href="/tags/cli/" rel="tag"># cli</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/26/generate-an-informative-version-name-using-git/" rel="prev" title="Generate an informative version name using Git">
+                  <i class="fa fa-angle-left"></i> Generate an informative version name using Git
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/14/using-leading-dot-syntax-in-generic-functions/" rel="next" title="Using leading dot syntax in generic functions">
+                  Using leading dot syntax in generic functions <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2016 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NSHaoSong</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
